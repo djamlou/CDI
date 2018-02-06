@@ -13,7 +13,7 @@ $result = $link->query('SELECT id, title FROM post');
 <html>
 <head>
     <title>
-        List of Posts
+        MyBlog : List of Posts
     </title>
 </head>
 <body>
