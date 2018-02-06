@@ -7,33 +7,21 @@ $link = new PDO
     ,
     'tactac'
 );
+if(!is_numeric($_GET['id']))
+
+{
+
+    echo '<h2 style="color:red">Cet article n\'existe pas</h2>';
+    die();
 
 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>
-        detail of Post
-    </title>
-</head>
-<body>
-<h1>
-    detail of Post
-</h1>
-<?php  $query = 'SELECT title, contenu, date FROM post WHERE  id=:id';
+}
+  $query = 'SELECT title, contenu, date FROM post WHERE  id=:id';
 $statement = $link->prepare($query);
 $statement->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
 $statement->execute();
 
 $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+require 'templates/show.php';
 ?>
-<h2><?=$row['title']; ?>  <?=$row['date']?></h2><br>
-
-<?=$row['contenu']?><br>
-
-
-<a href="index.php">Retour</a>
-</body>
-</html>
