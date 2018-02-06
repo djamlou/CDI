@@ -17,6 +17,6 @@ detail of Post
 <?=$row['contenu']?><br>
 
 
-<a href="index.php">Retour</a>
+<a href="indexController.php">Retour</a>
 </body>
 </html>

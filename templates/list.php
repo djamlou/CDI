@@ -13,7 +13,7 @@
         <?php foreach ($posts as $post):?>
 
         <li>
-            <a href="./detail.php?id=<?= $post['id'] ?>">
+            <a href="detailController.php?id=<?= $post['id'] ?>">
                 <?= $post['title'] ?>
             </a>
         </li>
