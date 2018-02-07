@@ -9,7 +9,7 @@ $title = 'List of posts'
         <?php foreach ($posts as $post):?>
 
         <li>
-            <a href="showController.php?id=<?= $post['id'] ?>">
+            <a href="index.php/show?id=<?= $post['id'] ?>">
                 <?= $post['title'] ?>
             </a>
         </li>
@@ -17,3 +17,6 @@ $title = 'List of posts'
 </ul>
 <?php $content = ob_get_clean() ?>
 <?php include 'templates/view/layout.php' ?>
+
+
+

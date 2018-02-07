@@ -9,9 +9,11 @@ detail of Post
     <h2><?=$row['title']; ?> posté le : <?=$row['date']?></h2><br>
 
 <?=$row['contenu']?><br>
+    <a href="/flatPHP/index.php/delete?id=<?=$row['id']?>">Supprimer</a><br>
+    <a href="/flatPHP/index.php">Retour</a>
 
 <?php $content = ob_get_clean() ?>
 
-<?php include 'layout.php' ?>
 
-<a href="indexController.php">Retour</a>
+
+<?php include 'templates/view/layout.php' ?>

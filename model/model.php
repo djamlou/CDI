@@ -15,6 +15,15 @@ function closeConnexion(&$link){
     $link = null;
 }
 
+function addPost(){
+
+    $link = BDDConnect();
+
+    $query = 'INSERT INTO post(title, contenu, date)VALUES ("salut", "comment ça va ?","2018-02-07")';
+    $statement = $link->prepare($query);
+    $statement->execute();
+
+}
 function getPosts(){
     $link = BDDConnect();
     $result = $link->query('SELECT id, title FROM post');
@@ -26,16 +35,25 @@ function getPosts(){
     return $posts;
 }
 
-function getPost(){
+function getPost($id){
     $link = BDDConnect();
 
 
-        $query = 'SELECT title, contenu, date FROM post WHERE  id=:id';
+        $query = 'SELECT * FROM post WHERE  id=:id';
         $statement = $link->prepare($query);
-        $statement->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $statement->bindValue(':id', $id, PDO::PARAM_INT);
         $statement->execute();
 
         $row = $statement->fetch(PDO::FETCH_ASSOC);
         return $row;
 
+}
+
+function deletePost($id){
+    $link = BDDConnect();
+
+    $query = 'DELETE FROM post WHERE id =:id';
+    $statement = $link->prepare($query);
+    $statement->bindValue(':id', $id, PDO::PARAM_INT);
+    $statement->execute();
 }
