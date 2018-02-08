@@ -2,6 +2,8 @@
 $title = 'List of posts'
 ?>
 <?php ob_start() ?>
+<a href="/flatPHP/index.php/add"> Ajouter un post</a>
+
 <h1>
     List of Posts
 </h1>

@@ -9,7 +9,10 @@ if ('/flatPHP/index.php' === $uri)
     list_action();
 }elseif ('/flatPHP/index.php/add' === $uri) {
     addPostForm();
-}elseif ('/flatPHP/index.php/delete' === $uri && isset($_GET['id'])) {
+}elseif ('/flatPHP/index.php/edit' === $uri) {
+    update();
+}
+elseif ('/flatPHP/index.php/delete' === $uri && isset($_GET['id'])) {
     delete($_GET['id']);
 }
 elseif ('/flatPHP/index.php/show' === $uri && isset($_GET['id']))
@@ -19,5 +22,5 @@ elseif ('/flatPHP/index.php/show' === $uri && isset($_GET['id']))
 else
 {
     header('HTTP/1.1 404 Not Found');
-    echo '<html><body><h1>Page Not Found</h1></body></html>';
+
 }

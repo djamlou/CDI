@@ -20,8 +20,8 @@ function show_action()
         $row = getPost($id);
 
         if(!$row){
-
-            echo '<h2 style="color:red">Cet article n\'existe pas</h2>';
+            header('Location: HTTP/1.1 404 not found');
+           // echo '<h2 style="color:red">Cet article n\'existe pas</h2>';
             die();
         }
         require 'templates/view/show.php';
@@ -30,14 +30,30 @@ function show_action()
     }
 }
 
-function addPostForm(){
-    $ajout = addPost();
-    require 'templates/view/addForm.php';
+function addPostForm($title, $content, $date){
+    if(empty($_POST)) {
+        require 'templates/view/addForm.php';
+    }else if ($_POST['title'] == '' || $_POST['content'] == '') {
+
+        require 'templates/view/addForm.php';
+    } else {
+
+        $ajout = addPost($title, $content, $date);
+        header('Location: /flatPHP/index.php');
+
+
+    }
+}
+
+function update($id, $title, $content){
+
+        $modif = updatePost($id, $title, $content);
+        require 'templates/view/editForm.php';
+
 }
 
 function delete($id){
 
         $delete = deletePost($id);
-        echo 'L\'article a bien été supprimé';
 
 }
