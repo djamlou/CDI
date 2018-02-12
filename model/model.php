@@ -15,14 +15,14 @@ function closeConnexion(&$link){
     $link = null;
 }
 
-function addPost($title, $content, $date){
+function addPost($title, $content){
 
     $link = BDDConnect();
 
         $date = date('Y-m-d H:i:s');
-        $query = 'INSERT INTO post(title, contenu, date)VALUES (":title", ":content", ":date" )';
+        $query = 'INSERT INTO post(title, contenu, date)VALUES (:title, :content, :date)';
         $statement = $link->prepare($query);
-        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+        $statement->bindParam('title', $title, PDO::PARAM_STR);
         $statement->bindParam(':content', $content, PDO::PARAM_STR);
         $statement->bindParam(':date', $date);
 
@@ -58,7 +58,7 @@ function getPost($id){
 function updatePost($id, $title, $content){
     $link = BDDConnect();
 
-        $query = 'UPDATE post SET (title =":title ", contenu =":content") WHERE  id=:id';
+        $query = 'UPDATE post SET title =:title, contenu =:content WHERE  id =:id';
         $statement = $link->prepare($query);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
         $statement->bindParam(':title', $title, PDO::PARAM_STR);

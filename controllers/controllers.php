@@ -30,26 +30,42 @@ function show_action()
     }
 }
 
-function addPostForm($title, $content, $date){
-    if(empty($_POST)) {
+function add_action($title, $content) {
+    //appeler le model en lui passant title et content pour une insertion en base
+    //deux cas :
+        // cas 1.: ça c'est bien passé j'appel une vue message ok
+        // cas 2 : ça c'est mal passé j'appel une vue error.
+        // (update todo: je reaffiche e formulaire avec les erreurs)
+
+    if ($_POST['title'] == '' || $_POST['content'] == '') {
         require 'templates/view/addForm.php';
-    }else if ($_POST['title'] == '' || $_POST['content'] == '') {
-
+    }else {
+        $ajout = addPost($title, $content);
+        echo 'ajouté';
         require 'templates/view/addForm.php';
-    } else {
-
-        $ajout = addPost($title, $content, $date);
-        header('Location: /flatPHP/index.php');
-
-
     }
 }
 
-function update($id, $title, $content){
+function printform_action(){
+    //pas besoin du model
+    //envoyer vers une vue qui dessine le formulaire
+    require 'templates/view/addForm.php';
+
+}
+
+function editForm($id){
+    //demander au modele de nous preparer les données dont on va avoir besoin
+    // à savoir le post qui a l'id $id.
+    $post = getPost($id);
+
+    require 'templates/view/editForm.php';
+}
+
+function update_action($id, $title, $content){
 
         $modif = updatePost($id, $title, $content);
-        require 'templates/view/editForm.php';
-
+        $url = "/flatPHP/index.php/show?id=".$id;
+        header("Location: ".$url);
 }
 
 function delete($id){
